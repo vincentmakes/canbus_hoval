@@ -16,7 +16,7 @@ This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board. 
 ## Firmware
 
 <p align="center">
-    <img src="esphome/home_assistant.png" width=80% />
+    <img src="home_assistant.png" width=80% />
     <br />
     <i>web interface at http://canbus.local/</i>
 </p>
