@@ -8,6 +8,17 @@ by [nliaudat]. It has since diverged significantly and is maintained independent
 
 
     
+
+
+## Home Assistant Dashboard
+
+<p align="center">
+    <img src="home_assistant.png" width=100% />
+    <br />
+    <i>web interface at http://canbus.local/</i>
+</p>
+Please ignore the valve actuator, this is part of another smaller project   
+
 ## Functionalities : 
 This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board (https://www.waveshare.com/wiki/ESP32-S3-RS485-CAN). This is an off the shelf IoT CAN transceiver which has DIN rail mount. It can be neatly mounted inside the Hoval TopTronic E casing. 
 <p align="center">
@@ -19,15 +30,6 @@ This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board (
 It cost about 20CHF so this is a much cheaper option than the official Hoval HomeAssistant solution. (4-500CHF)
 * The software runs under esphome to be easy to customize and linked with https://www.home-assistant.io 
 * Power is taken from CanBus 12V directly from the Hoval
-
-## Home Assistant Dashboard
-
-<p align="center">
-    <img src="home_assistant.png" width=100% />
-    <br />
-    <i>web interface at http://canbus.local/</i>
-</p>
-Please ignore the valve actuator, this is part of another smaller project   
 
 
 ### Features
