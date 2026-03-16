@@ -9,17 +9,26 @@ by [nliaudat]. It has since diverged significantly and is maintained independent
 
     
 ## Functionalities : 
-This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board. This is an off the shelf IoT CAN transceiver which has DIN rail mount. It can be neatly mounted inside the Hoval TopTronic E casing. It cost about 20CHF so this is a much cheaper option than the official Hoval HomeAssistant solution. (4-500CHF)
-* The software runs under esphome to be easy to customize and linked with https://www.home-assistant.io 
-* Power is taken from CanBus 12V 
+This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board (https://www.waveshare.com/wiki/ESP32-S3-RS485-CAN). This is an off the shelf IoT CAN transceiver which has DIN rail mount. It can be neatly mounted inside the Hoval TopTronic E casing. 
+<p align="center">
 
-## Firmware
+ <img src="esp32-s3-rs485-can-1.jpg" width=100% />
+     <br />
+ <img src="hoval_toptronic_e.jpg" width=100% />
+</p>
+It cost about 20CHF so this is a much cheaper option than the official Hoval HomeAssistant solution. (4-500CHF)
+* The software runs under esphome to be easy to customize and linked with https://www.home-assistant.io 
+* Power is taken from CanBus 12V directly from the Hoval
+
+## Home Assistant Dashboard
 
 <p align="center">
-    <img src="esphome/home_assistant.png" width=80% />
+    <img src="home_assistant.png" width=100% />
     <br />
     <i>web interface at http://canbus.local/</i>
 </p>
+Please ignore the valve actuator, this is part of another smaller project   
+
 
 ### Features
 
@@ -46,14 +55,7 @@ Version: 2023.11.6
 
 Enter your Wifi SSID and password in `secrets.yaml`.<br />
 
-3. Select your desired presets. All presets are located at [`esphome/src/preset`](https://github.com/nliaudat/esp_canbus/tree/main/esphome/src/preset). <br /> e.g. to select the HV preset in French:
-
-```yaml
-packages:
-  # ...
-  hv_sensors: !include src/preset/HV/sensors_fr.yaml
-  hv_inputs: !include src/preset/HV/inputs_fr.yaml
-```
+3. Select your desired presets. All presets are located at [`esphome/src/preset`]
 
 If you want to create your own preset or need other datapoints have a look at [`esphome/hoval_data_processing`](https://github.com/nliaudat/esp_canbus/tree/main/esphome/hoval_data_processing)
 
@@ -64,7 +66,6 @@ Then run `esphome run config.yaml`
 
 ## Note: 
 Not maintained for HomeVent 
-
 
 
 ## Licence: 
