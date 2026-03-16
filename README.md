@@ -17,7 +17,7 @@ by [nliaudat]. It has since diverged significantly and is maintained independent
     <br />
     <i>web interface at http://canbus.local/</i>
 </p>
-Please ignore the valve actuator, this is part of another smaller project   
+Please ignore the valve actuator, this is part of another smaller project (https://github.com/vincentmakes/belimo_ha)
 
 ## Functionalities : 
 This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board (https://www.waveshare.com/wiki/ESP32-S3-RS485-CAN). This is an off the shelf IoT CAN transceiver which has DIN rail mount. It can be neatly mounted inside the Hoval TopTronic E casing. 
