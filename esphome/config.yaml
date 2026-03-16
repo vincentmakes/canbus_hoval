@@ -1,0 +1,157 @@
+# ============================================================
+# Hoval TopTronic E CAN Gateway
+# Adapted for: Waveshare ESP32-S3-RS485-CAN
+# Based on: https://github.com/nliaudat/esp_canbus
+# ============================================================
+#
+# SETUP INSTRUCTIONS:
+# 1. Clone the nliaudat repo: git clone https://github.com/nliaudat/esp_canbus.git
+# 2. Replace the esphome/config.yaml with this file
+# 3. Copy secrets.yaml into the esphome/ folder
+# 4. Find your Hoval device addresses on the TopTronic E:
+#    Main Menu > Service > Maintenance > look for device codes like HV(8), FW(1), etc.
+# 5. Update the substitutions below with your addresses
+# 6. Select the correct presets for your installation
+# 7. Flash: esphome run config.yaml
+#
+# WIRING (Hoval RJ45 CAN → Waveshare screw terminals):
+#   RJ45 Pin 1 (CAN_H)  → Waveshare CAN_H
+#   RJ45 Pin 2 (CAN_L)  → Waveshare CAN_L
+#   RJ45 Pin 3 (CAN_GND)→ Waveshare GND (power input)
+#   RJ45 Pin 8 (CAN_V+) → Waveshare VIN (7-36V input)
+#
+# TERMINATION:
+#   If this device is the last on the CAN bus chain,
+#   move the Waveshare CAN jumper cap to "120R" position.
+#   If it's in the middle of the chain, leave it open.
+# ============================================================
+
+substitutions:
+  device_name: "hoval-canbus"
+  friendly_name: "Hoval TopTronic E"
+
+  # ---- Waveshare ESP32-S3-RS485-CAN pin mapping ----
+  can_tx_pin: GPIO15
+  can_rx_pin: GPIO16
+
+  # ---- Hoval device addresses ----
+  # Find these on your TopTronic E touchscreen:
+  # Main Menu > Service > Maintenance
+  # Example: HV(8) → TT_HV_addr: "8"
+  #          FW(1) → TT_FW_addr: "1"  (Fernwärme/district heating)
+  #
+  # Addresses found on YOUR TopTronic E (Service > TTE-FW):
+  TT_FW_addr: "1"           # Fernwärme station #1 (district heating primary)
+  # TT_FW2_addr: "2"       # Fernwärme station #2 (if needed)
+  TT_WEZ_addr: "7"          # Heat generator module (WEZ #1)
+  # TT_WEZ2_addr: "8"      # Heat generator module (WEZ #2)
+  # TT_WEZ3_addr: "9"      # Heat generator module (WEZ #3)
+  # TT_WEZ4_addr: "10"     # Heat generator module (WEZ #4)
+  #
+  # Function groups inside TTE-FW(1):
+  #   General (0), Heating circ. (1), Hot water (2), Heat manager (3)
+
+esphome:
+  name: ${device_name}
+  friendly_name: ${friendly_name}
+  comment: "Hoval TopTronic E CAN Gateway on Waveshare ESP32-S3-RS485-CAN"
+
+# ---- ESP32-S3 board config ----
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+    # esp-idf recommended for ESP32-S3 CAN/TWAI support
+
+# ---- Custom Toptronic component ----
+external_components:
+  - source:
+      type: local
+      path: components
+
+# ---- Logging ----
+logger:
+  level: DEBUG
+  baud_rate: 0  # disable UART logging
+  logs:
+    canbus: ERROR  # below INFO may crash (esphome/issues#4051)
+    sensor: INFO
+    tt: INFO
+    text_sensor: ERROR
+
+# ---- Home Assistant API ----
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+# ---- OTA updates ----
+ota:
+  - platform: esphome
+    password: !secret ota_password
+
+# ---- WiFi ----
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot in case wifi connection fails
+  ap:
+    ssid: "${friendly_name} AP"
+    password: !secret ap_password
+
+captive_portal:
+
+# ---- Web server for local access ----
+web_server:
+  port: 80
+
+# ---- Toptronic component instance ----
+toptronic:
+  id: tt
+
+# ---- CAN Bus config ----
+# Hoval TopTronic E uses 50kbps CAN
+canbus:
+  - platform: esp32_can
+    id: cbus
+    tx_pin: ${can_tx_pin}
+    rx_pin: ${can_rx_pin}
+    can_id: 0
+    bit_rate: 50kbps
+    on_frame:
+    - can_id: 0
+      can_id_mask: 0
+      use_extended_id: true
+      then:
+      - lambda: |-
+            id(tt).parse_frame(x, can_id, remote_transmission_request);
+
+# ---- Hoval Presets ----
+# Uncomment the presets matching YOUR installation.
+# Available presets are in the nliaudat repo under:
+#   esphome/src/preset/
+#
+# Each device type has sensor + input YAML files,
+# with language variants (_en, _fr, _de).
+#
+# For a Fernwärme (district heating) + floor heating setup,
+# you likely need FW (Fernwärme) and possibly HK (Heizkreis).
+select:
+number:
+packages:
+  # ---- Fernwärme / District Heating (CUSTOM - created for your system) ----
+  # Copy src/preset/FW/ folder into the cloned repo's esphome/src/preset/
+  fw_sensors: !include src/preset/FW/sensors_en.yaml
+  #fw_inputs: !include src/preset/FW/inputs_en.yaml
+
+  # ---- Heat Generator (Wärmeerzeuger) ----
+  # Your WEZ modules (7, 8, 9, 10) — enable after FW works:
+  wez_sensors: !include src/preset/WEZ/sensors_en.yaml
+  # wez_inputs: !include src/preset/WEZ/inputs_en.yaml
+
+  # ---- BedienModul (touchscreen sensors) ----
+  # bm_sensors: !include src/preset/BM/sensors_en.yaml
+
+  # ---- HomeVent (not in your system) ----
+  # hv_sensors: !include src/preset/HV/sensors_en.yaml
+  # hv_inputs: !include src/preset/HV/inputs_en.yaml

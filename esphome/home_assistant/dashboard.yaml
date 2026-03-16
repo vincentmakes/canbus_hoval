@@ -1,0 +1,190 @@
+views:
+  - title: Heating System
+    path: heating
+    icon: mdi:radiator
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: heading
+            heading: Domestic Hot Water
+            heading_style: title
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                entity: sensor.hoval_toptronic_e_wez_hot_water_actual_sf
+                name: Tank Temperature
+                min: 0
+                max: 80
+                needle: true
+                severity:
+                  green: 50
+                  yellow: 40
+                  red: 0
+                unit: °C
+              - type: gauge
+                entity: sensor.hoval_toptronic_e_wez_hot_water_setpoint
+                name: Setpoint
+                min: 0
+                max: 80
+                needle: true
+                severity:
+                  green: 50
+                  yellow: 40
+                  red: 0
+                unit: °C
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.hoval_toptronic_e_wez_hot_water_operation_choice
+                name: DHW Mode
+                icon: mdi:water-boiler
+                color: cyan
+              - type: tile
+                entity: sensor.hoval_toptronic_e_status_domestic_hot_water_control
+                name: DHW Status
+                icon: mdi:water-check
+                color: cyan
+          - type: history-graph
+            title: Hot Water Temperature (24h)
+            hours_to_show: 24
+            entities:
+              - entity: sensor.hoval_toptronic_e_wez_hot_water_actual_sf
+                name: Actual
+              - entity: sensor.hoval_toptronic_e_wez_hot_water_setpoint
+                name: Setpoint
+      - type: vertical-stack
+        cards:
+          - type: heading
+            heading: Floor Heating
+            heading_style: title
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.hoval_toptronic_e_wez_heating_operation_choice_1
+                name: Heating Mode
+                icon: mdi:radiator
+                color: orange
+              - type: tile
+                entity: sensor.hoval_toptronic_e_normal_room_temp_heating_oper_1
+                name: Room Setpoint
+                icon: mdi:home-thermometer
+                color: orange
+              - type: tile
+                entity: sensor.hoval_toptronic_e_status_heating_circuit_control
+                name: Heating Status
+                icon: mdi:heating-coil
+                color: orange
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.hoval_toptronic_e_wez_supply_actual_1
+                name: Supply Temp
+                icon: mdi:pipe-valve
+                color: red
+              - type: gauge
+                entity: sensor.hoval_toptronic_e_mixer_position_1
+                name: Mixer Valve
+                min: -100
+                max: 100
+                needle: true
+                unit: '%'
+              - type: tile
+                entity: sensor.hoval_toptronic_e_pump_status_1
+                name: Pump
+                icon: mdi:pump
+                color: green
+          - type: history-graph
+            title: Temperatures (24h)
+            hours_to_show: 24
+            entities:
+              - entity: sensor.hoval_toptronic_e_wez_af1_outdoor_sensor_1
+                name: Outdoor
+              - entity: sensor.hoval_toptronic_e_supply_actual_1
+                name: District Supply
+              - entity: sensor.hoval_toptronic_e_wez_supply_actual_1
+                name: Floor Loop Supply
+      - type: vertical-stack
+        cards:
+          - type: heading
+            heading: System Overview
+            heading_style: title
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.hoval_toptronic_e_wez_af1_outdoor_sensor_1
+                name: Outdoor
+                icon: mdi:thermometer
+                color: blue
+              - type: tile
+                entity: sensor.hoval_toptronic_e_supply_actual_1
+                name: District Supply
+                icon: mdi:pipe-valve
+                color: deep-orange
+              - type: tile
+                entity: sensor.hoval_toptronic_e_wez_output
+                name: WEZ Output
+                icon: mdi:gauge
+                color: amber
+      - type: vertical-stack
+        cards:
+          - type: heading
+            heading: Energy
+            heading_style: title
+          - type: horizontal-stack
+            cards:
+              - type: tile
+                entity: sensor.hoval_toptronic_e_heat_quantity_heating
+                name: Heating
+                icon: mdi:fire
+                color: deep-orange
+              - type: tile
+                entity: sensor.hoval_toptronic_e_heat_quantity_dhw
+                name: DHW
+                icon: mdi:water-boiler
+                color: cyan
+              - type: tile
+                entity: sensor.hoval_toptronic_e_eletrical_energy_wez_mwh
+                name: Electrical
+                icon: mdi:lightning-bolt
+                color: amber
+      - type: vertical-stack
+        title: Heating Valve
+        cards:
+          - type: picture-entity
+            entity: binary_sensor.shelly_1_mini_gen4_input
+            name: Heating Valve
+            show_state: false
+            show_name: false
+            state_image:
+              'on': /local/belimo_v8_open.svg
+              'off': /local/belimo_v8_closed.svg
+              unavailable: /local/belimo_v8_open.svg
+              unknown: /local/belimo_v8_open.svg
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    background: rgba(200, 200, 200, 0.15);
+                  }
+                hui-image $: |
+                  img {
+                    max-height: 400px !important;
+                    object-fit: contain !important;
+                  }
+          - type: entities
+            entities:
+              - entity: binary_sensor.shelly_1_mini_gen4_input
+                name: Valve Status
+                icon: mdi:valve
+              - type: attribute
+                entity: binary_sensor.shelly_1_mini_gen4_input
+                attribute: last_changed
+                name: Since
+                icon: mdi:clock-outline
+                format: relative
+          - type: history-graph
+            entities:
+              - entity: binary_sensor.shelly_1_mini_gen4_input
+                name: Heating history
+            hours_to_show: 24
+            show_names: false

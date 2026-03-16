@@ -1,0 +1,242 @@
+sensor:
+- platform: toptronic
+  name: "AF 1 - sonde ext\xE9rieure 1"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 0
+  function_number: 0
+  datapoint: 0
+  id: FW_0_0_0
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+- platform: toptronic
+  name: "temp\xE9rature local normale mode chauffage (1)"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 1
+  function_number: 0
+  datapoint: 3051
+  id: FW_1_0_3051
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+  internal: true
+- platform: toptronic
+  name: "temp\xE9rature local \xE9co mode chauffage (1)"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 1
+  function_number: 0
+  datapoint: 3053
+  id: FW_1_0_3053
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+  internal: true
+- platform: toptronic
+  name: "Valeur de consigne pi\xE8ce (1)"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 1
+  function_number: 0
+  datapoint: 1001
+  id: FW_1_0_1001
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+  internal: true
+- platform: toptronic
+  name: "temp\xE9rature d'eau chaude normale"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 2
+  function_number: 0
+  datapoint: 5051
+  id: FW_2_0_5051
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+  internal: true
+- platform: toptronic
+  name: "temp\xE9rature eau chaude \xE9co"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 2
+  function_number: 0
+  datapoint: 5086
+  id: FW_2_0_5086
+  type: U8
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+  internal: true
+- platform: toptronic
+  name: Eau chaude consigne
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 2
+  function_number: 0
+  datapoint: 1004
+  id: FW_2_0_1004
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+- platform: toptronic
+  name: "Eau chaude r\xE9elle SF"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 2
+  function_number: 0
+  datapoint: 4
+  id: FW_2_0_4
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+- platform: toptronic
+  name: "Statut r\xE9gulation circuit de chauffage"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 1
+  function_number: 0
+  datapoint: 2051
+  id: FW_1_0_2051
+  type: U8
+- platform: toptronic
+  name: "Statut r\xE9gulation eau chaude"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 2
+  function_number: 0
+  datapoint: 2052
+  id: FW_2_0_2052
+  type: U8
+- platform: toptronic
+  name: "AF 2 - sonde ext\xE9rieure 2"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 0
+  function_number: 0
+  datapoint: 21100
+  id: FW_0_0_21100
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+- platform: toptronic
+  name: "Valeur r\xE9elle pi\xE8ce (1)"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 1
+  function_number: 0
+  datapoint: 1
+  id: FW_1_0_1
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+- platform: toptronic
+  name: "Aller r\xE9el (1)"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 1
+  function_number: 0
+  datapoint: 2
+  id: FW_1_0_2
+  type: S16
+  accuracy_decimals: 1
+  filters:
+  - multiply: 0.1
+  unit_of_measurement: "\xB0C"
+  icon: mdi:temperature-celsius
+  device_class: temperature
+  state_class: measurement
+text_sensor:
+- platform: toptronic
+  name: "S\xE9lection fonctionnement chauffage (1)"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 1
+  function_number: 0
+  datapoint: 3050
+  id: FW_1_0_3050
+  options:
+  - Stand-by
+  - Semaine 1
+  - Semaine 2
+  - Constant
+  - "Mode \xE9co"
+  - Commande manuelle chauffage
+  - Commande manuelle refroid
+  values:
+  - 0
+  - 1
+  - 2
+  - 4
+  - 5
+  - 7
+  - 8
+- platform: toptronic
+  name: "S\xE9lection fonct. eau chaude"
+  device_type: FW
+  device_addr: ${TT_FW_addr}
+  function_group: 2
+  function_number: 0
+  datapoint: 5050
+  id: FW_2_0_5050
+  options:
+  - Stand-by
+  - Semaine 1
+  - Semaine 2
+  - Constant
+  - "Mode \xE9co"
+  values:
+  - 0
+  - 1
+  - 2
+  - 4
+  - 6
