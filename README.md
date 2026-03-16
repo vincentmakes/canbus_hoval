@@ -12,9 +12,9 @@ by [nliaudat]. It has since diverged significantly and is maintained independent
 This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board (https://www.waveshare.com/wiki/ESP32-S3-RS485-CAN). This is an off the shelf IoT CAN transceiver which has DIN rail mount. It can be neatly mounted inside the Hoval TopTronic E casing. 
 <p align="center">
 
- <img src="esp32-s3-rs485-can-1.jpg" width=100% />
+ <img src="esp32-s3-rs485-can-1.jpg" width=40% />
      <br />
- <img src="hoval_toptronic_e.jpg" width=100% />
+ <img src="hoval_toptronic_e.jpg" width=70% />
 </p>
 It cost about 20CHF so this is a much cheaper option than the official Hoval HomeAssistant solution. (4-500CHF)
 * The software runs under esphome to be easy to customize and linked with https://www.home-assistant.io 
