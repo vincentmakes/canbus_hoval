@@ -1,9 +1,10 @@
 # Firmware for Waveshare ESP32-S3 RS485 CAN to integrate Hoval TopTronic E into Home Assistant
 
-<!---[![Wiki badge](https://img.shields.io/badge/Wiki-up_to_date-dark_green)](https://github.com/nliaudat/esp_canbus/wiki)
-[![Build badge](https://github.com/nliaudat/esp_canbus/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/nliaudat/esp_canbus/actions?query=workflow%3ABuild+branch%3Amain)-->
 
+## Acknowledgements
 
+This project originated as a fork of [Original Project](https://github.com/nliaudat/esp_canbus) 
+by [nliaudat]. It has since diverged significantly and is maintained independently.
 
 
     
@@ -15,7 +16,7 @@ This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board. 
 ## Firmware
 
 <p align="center">
-    <!-- <img src="esphome/home_assistant.png" width=55% /> -->
+    <img src="esphome/home_assistant.png" width=80% />
     <br />
     <i>web interface at http://canbus.local/</i>
 </p>
@@ -44,9 +45,7 @@ Version: 2023.11.6
 #### Firmware configuration
 
 Enter your Wifi SSID and password in `secrets.yaml`.<br />
-Then open `config.yaml` and make the following changes:
-1. Set `can_tx_pin` and `can_rx_pin`
-2. Update the device list. You can find the list of your hoval devices in your room control unit under maintenance. (e.g. `HV(8)` is written as `TT_HV_addr: "8"`)
+
 3. Select your desired presets. All presets are located at [`esphome/src/preset`](https://github.com/nliaudat/esp_canbus/tree/main/esphome/src/preset). <br /> e.g. to select the HV preset in French:
 
 ```yaml
@@ -64,10 +63,7 @@ Connect your ESP32 via USB to your computer. (Only required for the first time, 
 Then run `esphome run config.yaml`
 
 ## Note: 
-For HomeVent : 
-* Canbus Normal ventilation modulation works only in "Constant operation mode" 
-* Canbus Eco ventilation modulation works only in "Eco operation mode" 
-* Week 1 and Week 2 must be setup in homevent
+Not maintained for HomeVent 
 
 
 
