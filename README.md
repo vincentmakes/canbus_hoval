@@ -20,7 +20,7 @@ by [nliaudat]. It has since diverged significantly and is maintained independent
 Please ignore the valve actuator, this is part of another smaller project (https://github.com/vincentmakes/belimo_ha)
 
 ## Functionalities : 
-This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board (https://www.waveshare.com/wiki/ESP32-S3-RS485-CAN). This is an off the shelf IoT CAN transceiver which has DIN rail mount. It can be neatly mounted inside the Hoval TopTronic E casing. 
+This firmware has been tailored to run on a WaveShare ESP32-S3 RS485 CAN Board ( https://www.waveshare.com/esp32-s3-rs485-can.htm?&aff_id=142371 ).This is an off the shelf IoT CAN transceiver which has DIN rail mount. It can be neatly mounted inside the Hoval TopTronic E casing. 
 
 <img width="680" height="505" src="https://github.com/user-attachments/assets/26fe1e41-b280-413a-86cd-8e2e81a331e3" />
 
