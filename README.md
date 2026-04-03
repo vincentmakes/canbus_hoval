@@ -13,7 +13,7 @@ by [nliaudat]. It has since diverged significantly and is maintained independent
 ## Home Assistant Dashboard
 
 <p align="center">
-    <img src="home_assistant.png" width=100% />
+    <img src="home_assistant_2.png" width=100% />
     <br />
     <i>web interface at http://canbus.local/</i>
 </p>
